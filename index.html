@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Gerbang Dimensi</title>
+    <!-- Tailwind CSS untuk styling dasar -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+        * Ini adalah isi dari file style.css
+        * Kamu bisa menyalin kode di bawah ini ke file style.css
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #E5E7EB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            background-image: url('https://media.giphy.com/media/l4KibWpBGWchSqCRy/giphy.gif'); /* Ganti URL GIF ini */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Overlay gelap agar teks lebih mudah dibaca */
+            z-index: 1;
+        }
+
+        .game-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 1.5rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-container h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #F9FAFB;
+        }
+
+        .game-container p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #D1D5DB;
+        }
+
+        .button-game {
+            background-color: #6366F1;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.6);
+            border: 2px solid #4F46E5;
+        }
+
+        .button-game:hover {
+            background-color: #4F46E5;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .button-game:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Backsound untuk game -->
+    <!-- Catatan: Autoplay mungkin tidak berfungsi di beberapa browser karena kebijakan mereka -->
+    <audio id="background-music" autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"> <!-- Ganti URL ini -->
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <div class="game-container">
+        <!-- Judul Game -->
+        <h1 id="game-title">Petualangan Gerbang Dimensi</h1>
+
+        <!-- Deskripsi/Cerita Game -->
+        <p id="game-text">
+            Kamu terbangun di sebuah ruangan aneh. Sinar bulan menembus celah di atap, menyinari sebuah pintu besar yang terbuat dari batu. Kamu merasa ada panggilan misterius yang membimbingmu ke sana. Apa yang akan kamu lakukan?
+        </p>
+
+        <!-- Tombol untuk interaksi -->
+        <button id="next-slide-button" class="button-game">Buka Gerbang</button>
+    </div>
+
+    <script>
+        /*
+        * Ini adalah isi dari file script.js
+        * Kamu bisa menyalin kode di bawah ini ke file script.js
+        */
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameTitle = document.getElementById('game-title');
+            const gameText = document.getElementById('game-text');
+            const nextButton = document.getElementById('next-slide-button');
+            const backgroundMusic = document.getElementById('background-music');
+
+            let slide = 1;
+
+            // Memulai musik saat user berinteraksi
+            document.body.addEventListener('click', () => {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play();
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (slide === 1) {
+                    // Perubahan untuk slide kedua
+                    gameTitle.textContent = "Dunia Baru";
+                    gameText.textContent = "Gerbang terbuka, dan kamu melangkah ke dunia yang penuh dengan hutan berkilauan dan makhluk asing. Petualanganmu baru saja dimulai.";
+                    nextButton.textContent = "Mulai Petualangan";
+                    slide = 2;
+                } else if (slide === 2) {
+                    // Perubahan untuk slide ketiga (atau akhir)
+                    gameTitle.textContent = "Selamat Datang, Pahlawan!";
+                    gameText.textContent = "Petualanganmu dimulai di sini. Jelajahi, lawan monster, dan temukan takdirmu. Semoga beruntung!";
+                    nextButton.style.display = 'none'; // Sembunyikan tombol
+                }
+            });
+        });
+    </script>
+</body>
+</html>
